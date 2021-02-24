@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+
+.my-custom-snackbar {
+    margin: 0 !important;
+    position: absolute;
+    bottom: 8px;
+    left: 35%;
+    /* transform: translate(-50%, -50%); */
+    background-color: gray;
+}
