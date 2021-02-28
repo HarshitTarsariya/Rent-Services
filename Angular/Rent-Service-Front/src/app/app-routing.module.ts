@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ActivateComponent } from './auth/activate/activate.component';
+import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path:'activate',
     component:ActivateComponent
+  },
+  {
+    path:'forget-password',
+    component:ForgetPasswordComponent
   }
 ];
 

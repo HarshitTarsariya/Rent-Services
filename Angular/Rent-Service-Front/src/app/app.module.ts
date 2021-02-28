@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import * as $ from 'jquery';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
@@ -14,6 +14,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivateComponent } from './auth/activate/activate.component';
+import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
+import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +24,8 @@ import { ActivateComponent } from './auth/activate/activate.component';
     LoginComponent,
     SignupComponent,
     FooterComponent,
-    ActivateComponent
+    ActivateComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +34,9 @@ import { ActivateComponent } from './auth/activate/activate.component';
     NgbModule,
     MatSnackBarModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    LoadingBarModule,
+    LoadingBarRouterModule
   ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
   bootstrap: [AppComponent]

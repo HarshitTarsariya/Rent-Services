@@ -16,4 +16,16 @@ export class UserService {
   activateAccount(token){
     return this.http.get(environment.apiEndPoint+'/activate',{headers:{'token':token}});
   }
+  login(userCredentials){
+    return this.http.post(environment.apiEndPoint+'/login',userCredentials);
+  }
+  setToken(token){
+    localStorage.setItem('token',token);
+  }
+  sendResetLink(email_id){
+    return this.http.post(environment.apiEndPoint+'/resetPasswordSendLink',{'email_id':email_id});
+  }
+  changePassword(data){
+    return this.http.post(environment.apiEndPoint+'/changePassword',data)
+  }
 }
