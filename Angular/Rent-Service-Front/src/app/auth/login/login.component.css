@@ -58,7 +58,7 @@ input[type="email"]:focus+.input_info {
 }
 
 #page-wrapper {
-    /* background-image: url('../../../../src/assets/images/background.jpg'); */
+    background-image: url('../../../../src/assets/images/background.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: left top;

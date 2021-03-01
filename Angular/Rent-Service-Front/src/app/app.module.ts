@@ -17,6 +17,7 @@ import { ActivateComponent } from './auth/activate/activate.component';
 import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
+import { HomeComponent } from './layout/home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,8 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
     SignupComponent,
     FooterComponent,
     ActivateComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
