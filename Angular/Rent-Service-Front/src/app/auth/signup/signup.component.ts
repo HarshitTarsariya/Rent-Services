@@ -3,6 +3,8 @@ import {user} from '../../class/user';
 import {MatSnackBarModule,MatSnackBar, MatSnackBarHorizontalPosition} from '@angular/material/snack-bar';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import appstore from 'src/app/reducers/appstore';
+import { NOT_HOME } from 'src/app/reducers/appactions';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -16,6 +18,7 @@ export class SignupComponent implements OnInit {
   user:user=new user();
 
   ngOnInit(): void {
+    appstore.dispatch({type:NOT_HOME});
   }
   registerUser(){
     this.trimmer();

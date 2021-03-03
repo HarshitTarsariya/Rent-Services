@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NOT_HOME } from 'src/app/reducers/appactions';
+import appstore from 'src/app/reducers/appstore';
+import loginstore from 'src/app/reducers/appstore';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -30,9 +33,10 @@ export class ForgetPasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    appstore.dispatch({type:NOT_HOME});
   }
   forgetPassword(){
+
     this.userService.sendResetLink(this.email_id1).subscribe(
       res=>{
         this.snakbar.open("Reset Link sent on email","Close",{

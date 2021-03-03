@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import appstore from '../../reducers/appstore'
+import {HOME} from '../../reducers/appactions';
 
 @Component({
   selector: 'app-header',
@@ -7,18 +9,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor(private router:Router) { 
-    
-  }
-  url:string;
+  islogin:boolean;
   ishome:boolean;
+  constructor(private router:Router) { 
+    appstore.subscribe(()=>{
+      this.ishome=appstore.getState().ishome;  
+      this.islogin=appstore.getState().isLoggedIn;
+      console.log(appstore.getState());
+    });
+  }
+  
   ngOnInit(): void {
-    this.url=window.location.href.toString()
-    if(this.url.search("home")!=-1){
-      this.ishome=true;
-    }else{
-      this.ishome=false;
-    }
+    
   }
 }

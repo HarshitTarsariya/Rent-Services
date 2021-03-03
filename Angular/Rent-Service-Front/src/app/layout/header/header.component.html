@@ -19,7 +19,7 @@
             <!-- Right -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="#!" class="nav-link navbar-link-2 waves-effect">
+                    <a routerLink="/cart" class="nav-link navbar-link-2 waves-effect">
                         <span class="badge badge-pill">1</span>
                         <i class="fa fa-shopping-cart"></i>
                     </a>
@@ -30,18 +30,23 @@
               </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#!" class="nav-link waves-effect">
+                    <a routerLink="#!" class="nav-link waves-effect">
                 Contact
               </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="!islogin">
                     <a routerLink="/login" class="nav-link waves-effect">
                 Sign in
               </a>
                 </li>
-                <li class="nav-item pl-2 mb-2 mb-md-0">
+                <li class="nav-item pl-2 mb-2 mb-md-0" *ngIf="!islogin">
                     <a routerLink="/signup" type="button" class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">Sign
                 up</a>
+                </li>
+                <li class="nav-item" *ngIf="islogin">
+                    <a routerLink="/logout" class="nav-link waves-effect">
+                Logout
+                </a>
                 </li>
             </ul>
 

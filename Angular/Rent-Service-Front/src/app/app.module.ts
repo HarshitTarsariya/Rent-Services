@@ -18,6 +18,10 @@ import { ForgetPasswordComponent } from './auth/forget-password/forget-password.
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { HomeComponent } from './layout/home/home.component';
+
+import {NgReduxModule, NgRedux} from '@angular-redux/store';
+import { CartComponent } from './layout/cart/cart.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +31,8 @@ import { HomeComponent } from './layout/home/home.component';
     FooterComponent,
     ActivateComponent,
     ForgetPasswordComponent,
-    HomeComponent
+    HomeComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -38,9 +43,11 @@ import { HomeComponent } from './layout/home/home.component';
     BrowserAnimationsModule,
     HttpClientModule,
     LoadingBarModule,
-    LoadingBarRouterModule
+    LoadingBarRouterModule,
+    NgReduxModule
   ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+ }

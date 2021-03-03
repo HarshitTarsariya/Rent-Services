@@ -4,6 +4,7 @@ import { ActivateComponent } from './auth/activate/activate.component';
 import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { CartComponent } from './layout/cart/cart.component';
 import { HomeComponent } from './layout/home/home.component';
 
 const routes: Routes = [
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path:'home',
     component:HomeComponent,
+  },
+  {
+    path:'cart',
+    component:CartComponent
   }
 ];
 
