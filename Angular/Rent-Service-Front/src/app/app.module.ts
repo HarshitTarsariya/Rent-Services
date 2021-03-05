@@ -21,6 +21,7 @@ import { HomeComponent } from './layout/home/home.component';
 
 import {NgReduxModule, NgRedux} from '@angular-redux/store';
 import { CartComponent } from './layout/cart/cart.component';
+import { AddProductComponent } from './layout/add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CartComponent } from './layout/cart/cart.component';
     ActivateComponent,
     ForgetPasswordComponent,
     HomeComponent,
-    CartComponent
+    CartComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +47,7 @@ import { CartComponent } from './layout/cart/cart.component';
     LoadingBarModule,
     LoadingBarRouterModule,
     NgReduxModule
+    
   ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
   bootstrap: [AppComponent]

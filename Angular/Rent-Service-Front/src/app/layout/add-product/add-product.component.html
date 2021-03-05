@@ -1,0 +1,158 @@
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="center_div">
+                <br/>
+                <form #uploadForm="ngForm" class="well shadow" (ngSubmit)="addProduct()">
+                    <h3 class=" mt-3 text-center">Add Product</h3><br>
+                    <div class="row">
+                        <div class="form-group input-group">
+                            <div class="col-2">
+                            </div>
+                            <div class="col-8">
+                                <span> <i class="fa fa-product-hunt"></i> </span>
+                                <input [(ngModel)]="product.productname" #productname="ngModel" name="productname" class="form-control " placeholder="Product Name" required minlength="5">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                        </div>
+                        <div class="col-8">
+                            <div *ngIf="productname.dirty && !productname.valid ">
+                                <label *ngIf="productname.errors.required " style="color:red ">Product Name is required </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group input-group">
+                            <div class="col-2">
+                            </div>
+                            <div class="col-8">
+                                <span class="input-group-addon"> <i class="fa fa-file-alt"></i> </span>
+                                <textarea [(ngModel)]="product.description" #description="ngModel" name="description" class="md-textarea form-control" rows="5" placeholder="Description" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                        </div>
+                        <div class="col-8">
+                            <div *ngIf="description.dirty && !description.valid ">
+                                <label *ngIf="description.errors.required " style="color:red ">Description is required </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group input-group">
+                            <div class="col-2">
+                            </div>
+                            <div class="col-8">
+                                <span> <i class="fa fa-location-arrow"></i> </span>
+                                <input [(ngModel)]="product.addressOfProduct" #addressOfProduct="ngModel" name="addressOfProduct" class="form-control " placeholder="Address" required minlength="5">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                        </div>
+                        <div class="col-8">
+                            <div *ngIf="addressOfProduct.dirty && !addressOfProduct.valid ">
+                                <label *ngIf="addressOfProduct.errors.required " style="color:red ">Address is required </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group input-group">
+                            <div class="col-2">
+                            </div>
+                            <div class="col-8">
+                                <span> <i class="fa fa-money-bill"></i> </span>
+                                <input [(ngModel)]="product.rent" #rent="ngModel" name="rent" class="form-control " placeholder="Rent" min="0" required type="number">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                        </div>
+                        <div class="col-8">
+                            <div *ngIf="rent.dirty && !rent.valid ">
+                                <label *ngIf="rent.errors.required " style="color:red ">Rent is required </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group input-group">
+                            <div class="col-2">
+                            </div>
+                            <div class="col-8">
+                                <span> <i class="fa fa-money-bill"></i> </span>
+                                <input [(ngModel)]="product.deposits" #deposits="ngModel" name="deposits" class="form-control " placeholder="Deposits" min="0" required type="number">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                        </div>
+                        <div class="col-8">
+                            <div *ngIf="deposits.dirty && !deposits.valid ">
+                                <label *ngIf="deposits.errors.required " style="color:red ">Deposits are required </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group input-group">
+                            <div class="col-2">
+                            </div>
+                            <div class="col-8">
+                                <span> <i class="fa fa-image"></i> </span>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" multiple="" id="filenames" (change)="onFileChange($event)" id="customFile" required="true">
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col-2">
+                        </div>
+                        <div class="col-8">
+                            <div *ngIf="image.dirty && !image.valid ">
+                                <label *ngIf="image.errors.required " style="color:red ">Images of product required </label>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="row">
+                        <div class="col-2">
+                        </div>
+                        <img *ngFor='let url of images' [src]="url" class="col-2">
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                        </div>
+                        <div class="col-8">
+                            <div *ngIf="deposits.dirty && !deposits.valid ">
+                                <label *ngIf="deposits.errors.required" style="color:red ">Deposits are required </label>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-2">
+                        </div>
+                        <div class="col-8">
+                            <div class="form-group ">
+                                <input type="submit" [disabled]="!uploadForm.valid" class="btn btn-primary btn-block" value="Add Product">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,7 @@
 import {Appstate} from './appstate';
 import {LOGIN,HOME,LOGOUT,NOT_HOME} from './appactions';
 
-export function appreducer(state,action):Appstate{
+export function appreducer(state={isLoggedIn:false,ishome:true,token:"GARBAGE"},action):Appstate{
     switch(action.type){
         case LOGIN:
             return {

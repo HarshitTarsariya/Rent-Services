@@ -11,11 +11,11 @@ import {HOME} from '../../reducers/appactions';
 export class HeaderComponent implements OnInit {
   islogin:boolean;
   ishome:boolean;
+  
   constructor(private router:Router) { 
     appstore.subscribe(()=>{
       this.ishome=appstore.getState().ishome;  
       this.islogin=appstore.getState().isLoggedIn;
-      console.log(appstore.getState());
     });
   }
   

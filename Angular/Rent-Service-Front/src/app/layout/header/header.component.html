@@ -1,11 +1,11 @@
 <!-- Main Navigation -->
 <!-- Navbar -->
-<nav class="navbar navbar-expand-md navbar-light fixed-top scrolling-navbar">
+<nav class="navbar navbar-expand-md navbar-light fixed-top scrolling-navbar shadow">
     <div class="container-fluid">
 
         <!-- Brand -->
         <a class="navbar-brand" routerLink="/home">
-            <h3>DealOnRent</h3>
+            <h3 class="rounded">DealOnRent</h3>
         </a>
 
         <!-- Collapse button -->
@@ -18,7 +18,7 @@
 
             <!-- Right -->
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="islogin">
                     <a routerLink="/cart" class="nav-link navbar-link-2 waves-effect">
                         <span class="badge badge-pill">1</span>
                         <i class="fa fa-shopping-cart"></i>
@@ -27,6 +27,11 @@
                 <li class="nav-item">
                     <a routerLink='/home' class="nav-link waves-effect">
                 Shop
+              </a>
+                </li>
+                <li class="nav-item">
+                    <a routerLink='/add-product' class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
+                Upload your own Product
               </a>
                 </li>
                 <li class="nav-item">
