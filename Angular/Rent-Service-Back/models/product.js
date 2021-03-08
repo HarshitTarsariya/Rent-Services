@@ -9,10 +9,13 @@ var productSchema = new mongoose.Schema({
         type: String
     },
     owner: {
-        type: user
+        type: Object
     },
     uploadeddate: {
         type: Date
+    },
+    address: {
+        type: String
     },
     rentperday: {
         type: Number
@@ -25,6 +28,10 @@ var productSchema = new mongoose.Schema({
     },
     ratings: {
         type: [ratings]
+    },
+    isAvailable: {
+        type: Boolean,
+        default: true
     }
 });
 module.exports = mongoose.model('Product', productSchema);

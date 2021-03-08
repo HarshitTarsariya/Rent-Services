@@ -22,6 +22,7 @@ import { HomeComponent } from './layout/home/home.component';
 import {NgReduxModule, NgRedux} from '@angular-redux/store';
 import { CartComponent } from './layout/cart/cart.component';
 import { AddProductComponent } from './layout/add-product/add-product.component';
+import { LogoutComponent } from './auth/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AddProductComponent } from './layout/add-product/add-product.component'
     ForgetPasswordComponent,
     HomeComponent,
     CartComponent,
-    AddProductComponent
+    AddProductComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

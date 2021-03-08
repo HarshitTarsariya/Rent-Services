@@ -28,8 +28,7 @@ export class LoginComponent implements OnInit {
           duration:6000,
           panelClass: 'my-custom-snackbar',
         });
-        
-        appstore.dispatch({type:LOGIN,body:{'token':res['token']}});
+        appstore.dispatch({type:LOGIN,payload:{token:res['token']}});
         this.router.navigate(['/home']);
       },
       err=>{

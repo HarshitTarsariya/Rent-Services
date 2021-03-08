@@ -20,38 +20,38 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item" *ngIf="islogin">
                     <a routerLink="/cart" class="nav-link navbar-link-2 waves-effect">
-                        <span class="badge badge-pill">1</span>
-                        <i class="fa fa-shopping-cart"></i>
+                        <b><span class="badge badge-pill">1</span>
+                        <i class="fa fa-shopping-cart"></i></b>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a routerLink='/home' class="nav-link waves-effect">
-                Shop
-              </a>
+                        <b>Shop</b>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a routerLink='/add-product' class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
-                Upload your own Product
-              </a>
+                        <b>Upload your own Product</b>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a routerLink="#!" class="nav-link waves-effect">
-                Contact
-              </a>
+                        <b>Contact</b>
+                    </a>
                 </li>
                 <li class="nav-item" *ngIf="!islogin">
                     <a routerLink="/login" class="nav-link waves-effect">
-                Sign in
-              </a>
+                        <b>Sign in</b>
+                    </a>
                 </li>
                 <li class="nav-item pl-2 mb-2 mb-md-0" *ngIf="!islogin">
-                    <a routerLink="/signup" type="button" class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">Sign
-                up</a>
+                    <a routerLink="/signup" type="button" class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light"><b>Sign
+                up</b></a>
                 </li>
                 <li class="nav-item" *ngIf="islogin">
                     <a routerLink="/logout" class="nav-link waves-effect">
-                Logout
-                </a>
+                        <b>Logout</b>
+                    </a>
                 </li>
             </ul>
 

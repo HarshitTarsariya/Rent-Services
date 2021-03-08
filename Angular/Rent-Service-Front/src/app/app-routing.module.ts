@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ActivateComponent } from './auth/activate/activate.component';
+import { AuthGuard } from './auth/auth.guard';
 import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
 import { LoginComponent } from './auth/login/login.component';
+import { LogoutComponent } from './auth/logout/logout.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AddProductComponent } from './layout/add-product/add-product.component';
 import { CartComponent } from './layout/cart/cart.component';
@@ -36,11 +38,18 @@ const routes: Routes = [
   },
   {
     path:'cart',
-    component:CartComponent
+    component:CartComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'add-product',
-    component:AddProductComponent
+    component:AddProductComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path:'logout',
+    component:LogoutComponent,
+    canActivate:[AuthGuard]
   }
 ];
 

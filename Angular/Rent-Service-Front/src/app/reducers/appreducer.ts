@@ -1,12 +1,15 @@
 import {Appstate} from './appstate';
 import {LOGIN,HOME,LOGOUT,NOT_HOME} from './appactions';
 
+// Try not to navigate in Reducers or the place where Reducers are Subscribed
+
 export function appreducer(state={isLoggedIn:false,ishome:true,token:"GARBAGE"},action):Appstate{
     switch(action.type){
         case LOGIN:
             return {
                 ...state,
-                isLoggedIn:true
+                isLoggedIn:true,
+                token:action.payload.token
             }
         case LOGOUT:
             return{

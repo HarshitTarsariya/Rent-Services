@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { productUpload } from 'src/app/class/productUpload';
 import { NOT_HOME } from 'src/app/reducers/appactions';
 import appstore from 'src/app/reducers/appstore';
+import { ProductService } from 'src/app/services/product.service';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -13,16 +14,29 @@ export class AddProductComponent implements OnInit {
 
   product:productUpload=new productUpload();
   images=[];
-  constructor(private router:Router,public snakbar:MatSnackBar) { }
+  constructor(private router:Router,public snakbar:MatSnackBar,private productService:ProductService) { }
 
   ngOnInit(): void {
     appstore.dispatch({type:NOT_HOME});
-      if(appstore.getState().isLoggedIn==false){
-        this.router.navigate(['/login']);
-      }
   }
   addProduct(){
-    console.log(this.product);
+    this.product.dateUploaded=new Date();
+    console.log(new Date());
+    this.productService.addProduct(this.product).subscribe(
+      (res)=>{
+        this.snakbar.open(res['message'],"Close",{
+          duration:6000,
+          panelClass: 'my-custom-snackbar',
+        });
+        this.router.navigate(['/home']);
+      },
+      (err)=>{
+        this.snakbar.open(err.error.message,"Close",{
+          duration:6000,
+          panelClass: 'my-custom-snackbar',
+        });
+      }
+    );
   }
   onFileChange(event) {
     this.images=[];
