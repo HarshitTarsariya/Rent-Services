@@ -202,8 +202,16 @@ app.post('/addProduct', verifyJwtToken, (req, res) => {
     });
     prod.save((err, data) => {
         if (err)
-            res.status(422).json({ message: 'Something Went Wrong' });
+            return res.status(422).json({ message: 'Something Went Wrong' });
         else
-            res.status(200).json({ message: 'Product Added Successfully' });
+            return res.status(200).json({ message: 'Product Added Successfully' });
+    });
+});
+app.get('/allProducts', (req, res) => {
+    Product.find({}, (err, data) => {
+        if (err) res.status(422).json({ message: 'Something Went Wrong' });
+        else {
+            return res.status(200).json({ 'products': data });
+        }
     });
 });

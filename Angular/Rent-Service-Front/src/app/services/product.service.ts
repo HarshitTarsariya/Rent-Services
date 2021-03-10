@@ -14,4 +14,7 @@ export class ProductService {
   addProduct(product){
     return this.http.post(environment.apiEndPoint+'/addProduct',product);
   }
+  getProducts(){
+    return this.http.get(environment.apiEndPoint+'/allProducts');
+  }
 }
