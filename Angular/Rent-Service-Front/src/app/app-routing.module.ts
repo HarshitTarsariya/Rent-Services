@@ -9,6 +9,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { AddProductComponent } from './layout/add-product/add-product.component';
 import { CartComponent } from './layout/cart/cart.component';
 import { HomeComponent } from './layout/home/home.component';
+import { ProductComponent } from './layout/product/product.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,10 @@ const routes: Routes = [
     path:'logout',
     component:LogoutComponent,
     canActivate:[AuthGuard]
+  },
+  {
+    path:'product/:id',
+    component:ProductComponent
   }
 ];
 

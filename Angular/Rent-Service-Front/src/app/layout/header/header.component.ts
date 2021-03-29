@@ -11,11 +11,14 @@ import {HOME} from '../../reducers/appactions';
 export class HeaderComponent implements OnInit {
   islogin:boolean;
   ishome:boolean;
+  cartsize: Number;
   
   constructor(private router:Router) { 
     appstore.subscribe(()=>{
-      this.ishome=appstore.getState().ishome;  
-      this.islogin=appstore.getState().isLoggedIn;
+      const appstate=appstore.getState();
+      this.ishome=appstate.ishome;  
+      this.islogin=appstate.isLoggedIn;
+      this.cartsize=appstate.cart;
     });
   }
   

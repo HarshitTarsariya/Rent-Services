@@ -1,9 +1,8 @@
 import {Appstate} from './appstate';
-import {LOGIN,HOME,LOGOUT,NOT_HOME} from './appactions';
+import {LOGIN,HOME,LOGOUT,NOT_HOME, ADD_TO_CART} from './appactions';
 
 // Try not to navigate in Reducers or the place where Reducers are Subscribed
-
-export function appreducer(state={isLoggedIn:false,ishome:true,token:"GARBAGE"},action):Appstate{
+export function appreducer(state={isLoggedIn:false,ishome:true,token:"GARBAGE",cart:0},action):Appstate{
     switch(action.type){
         case LOGIN:
             return {
@@ -27,6 +26,12 @@ export function appreducer(state={isLoggedIn:false,ishome:true,token:"GARBAGE"},
             return {
                 ...state,
                 ishome:false
+            }
+        }
+        case ADD_TO_CART:{
+            return {
+                ...state,
+                cart:action.payload.cart
             }
         }
         default:

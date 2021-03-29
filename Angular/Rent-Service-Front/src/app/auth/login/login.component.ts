@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { user } from 'src/app/class/user';
 import { UserService } from 'src/app/services/user.service';
 import appstore from '../../reducers/appstore'
-import {HOME, LOGIN, NOT_HOME} from '../../reducers/appactions';
+import {ADD_TO_CART, HOME, LOGIN, NOT_HOME} from '../../reducers/appactions';
 
 @Component({
   selector: 'app-login',
@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
           panelClass: 'my-custom-snackbar',
         });
         appstore.dispatch({type:LOGIN,payload:{token:res['token']}});
+        appstore.dispatch({type:ADD_TO_CART,payload:{cart:res['cart']}});
         this.router.navigate(['/home']);
       },
       err=>{

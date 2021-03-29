@@ -116,7 +116,7 @@ app.post('/login', (req, res) => {
         if (err) return res.status(422).json({ message: 'Something went wrong' });
         if (!user) return res.status(500).json({ message: 'Invalid Email or Password' });
         else if (user.isActivated == "No") return res.status(500).json({ message: 'Email not verified! Please verify by email sent by us during registration' });
-        else return res.status(200).json({ 'token': getJwtForSession(user) });
+        else return res.status(200).json({ 'token': getJwtForSession(user), 'cart': user.cart.length });
     });
 });
 
@@ -212,6 +212,20 @@ app.get('/allProducts', (req, res) => {
         if (err) res.status(422).json({ message: 'Something Went Wrong' });
         else {
             return res.status(200).json({ 'products': data });
+        }
+    });
+});
+app.post('/addToCart', verifyJwtToken, (req, res) => {
+    User.updateOne({ _id: req._id }, {
+        $addToSet: { cart: req.body.cart }
+    }, (err, data) => {
+        if (err) res.status(422).json({ message: 'Something Went Wrong' });
+        else {
+            User.findOne({ _id: req._id }, { 'cart': 1 }, (err, data) => {
+                if (err) res.status(422).json({ message: 'Something Went Wrong' });
+                else
+                    return res.status(200).json({ 'cart': data.cart.length });
+            });
         }
     });
 });
