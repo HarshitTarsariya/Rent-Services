@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
   loginUser(){
     this.userService.login(this.user).subscribe(
       res=>{
-        this.userService.setToken(res['token']);
         this.snakbar.open("Logged In","Close",{
           duration:6000,
           panelClass: 'my-custom-snackbar',
