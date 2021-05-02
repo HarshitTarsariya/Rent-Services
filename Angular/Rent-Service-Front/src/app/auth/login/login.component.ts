@@ -3,6 +3,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { user } from 'src/app/class/user';
 import { UserService } from 'src/app/services/user.service';
+import appstore from '../../reducers/appstore'
+import {ADD_TO_CART, HOME, LOGIN, NOT_HOME} from '../../reducers/appactions';
 
 @Component({
   selector: 'app-login',
@@ -16,15 +18,17 @@ export class LoginComponent implements OnInit {
   constructor(public snakbar:MatSnackBar,private userService:UserService,private router:Router) { }
   
   ngOnInit(): void {
+    appstore.dispatch({type:NOT_HOME});
   }
   loginUser(){
     this.userService.login(this.user).subscribe(
       res=>{
-        this.userService.setToken(res['token']);
         this.snakbar.open("Logged In","Close",{
           duration:6000,
           panelClass: 'my-custom-snackbar',
         });
+        appstore.dispatch({type:LOGIN,payload:{token:res['token']}});
+        appstore.dispatch({type:ADD_TO_CART,payload:{cart:res['cart']}});
         this.router.navigate(['/home']);
       },
       err=>{
@@ -35,5 +39,4 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
 }

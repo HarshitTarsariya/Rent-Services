@@ -1,0 +1,88 @@
+<div class="row">
+    <div class="col-md">
+        <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-2" data-slide-to="1"></li>
+                <li data-target="#carousel-example-2" data-slide-to="2"></li>
+                <li data-target="#carousel-example-2" data-slide-to="3"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <div class="carousel-item active">
+                    <div class="view">
+                        <img class="d-block w-100" src="../../../assets/images/car1.jpg" height="700vh" alt="First slide">
+                        <a href="#!">
+                            <div class="mask rgba-black-light"></div>
+                        </a>
+                    </div>
+                    <div class="carousel-caption">
+                        <h3 class="h3-responsive">Wardrobe</h3>
+                        <p>Branded Products</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="view">
+                        <img class="d-block w-100" src="../../../assets/images/car2.jpg" height="700vh" alt="Second slide">
+                        <a href="#!">
+                            <div class="mask rgba-black-light"></div>
+                        </a>
+                    </div>
+                    <div class="carousel-caption">
+                        <h3 class="h3-responsive">Review</h3>
+                        <p>Honestly</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="view">
+                        <img class="d-block w-100" src="../../../assets/images/car3.jpg" height="700vh" alt="Third slide">
+                        <a href="#!">
+                            <div class="mask rgba-black-light"></div>
+                        </a>
+                    </div>
+                    <div class="carousel-caption">
+                        <h3 class="h3-responsive">Service you need</h3>
+                        <p>We provide at FingerTip</p>
+                    </div>
+
+                </div>
+                <div class="carousel-item">
+                    <div class="view">
+                        <img class="d-block w-100" src="../../../assets/images/car4.jpg" height="700vh" alt="Fourth slide">
+                        <a href="#!">
+                            <div class="mask rgba-black-light"></div>
+                        </a>
+                    </div>
+                    <div class="carousel-caption">
+                        <h3 class="h3-responsive">Earn out of It</h3>
+                        <p>Add your own product and earn</p>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class='container-fluid'>
+    <div class="row">
+        <div *ngFor="let product of products" class="card col-md-3 mt-5 " [class.border-success]="product.isAvailable" [class.border-danger]="!product.isAvailable"> <img class='mx-auto img-thumbnail card-img-top' [src]="product.images[0]" width="auto" height="auto" />
+            <div class="card-body text-center mx-auto">
+                <div class='cvp'>
+                    <h5 class="card-title">{{product.name}}</h5>
+                    <p class="card-text">Rent For Day: {{product.rentperday}}</p>
+                    <p class="card-text">Deposits: {{product.deposits}}</p> <a routerLink="/product/{{product._id}}" class="btn details px-auto">View Details</a><br /> <a *ngIf="product.isAvailable" (click)="addToCart(product._id)" class="btn cart px-auto">Add To Cart</a>
+                </div>
+            </div>
+            <div class="card-footer">
+                <p><i class="badge badge-success" *ngIf="product.isAvailable">Available! Grab Now</i><i class="badge badge-danger" *ngIf="!product.isAvailable">Out Of Stock</i></p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -18,8 +18,16 @@ mongoose.connect('mongodb://localhost:27017/RentServicesDB', { useNewUrlParser: 
 mongoose.set('useCreateIndex', true);
 
 app.use(bodyParser.urlencoded({ extended: false }));
+
+//Got Error Regarding maximum size exceeded for passing payload . Adding limit solved the problem!
+app.use(bodyParser({ limit: '50mb' }));
+
+//Parse Javascript Object to JSON specific
 app.use(bodyParser.json());
+
 app.use(bodyParser.raw());
+
+//Allow request from other ports
 app.use(cors());
 
 const port = process.env.PORT || 3000;
@@ -29,6 +37,7 @@ const server = app.listen(port, function() {
 });
 
 var User = require('./models/user');
+var Product = require('./models/product');
 
 app.post('/signup', (req, res) => {
     User.findOne({ email_id: req.body.email_id }, (err, data) => {
@@ -72,11 +81,11 @@ app.post('/signup', (req, res) => {
 });
 
 function getJwtForLinkVerification(data) {
-    return jwt.sign({ _id: `${data._id}`, name: data.name, email_id: data.email_id, activated: data.activated }, process.env.SECRET_KEY);
+    return jwt.sign({ _id: data._id, name: data.name, email_id: data.email_id, activated: data.activated }, process.env.SECRET_KEY);
 }
 
 function getJwtForSession(data) {
-    return jwt.sign({ _id: `${data._id}`, name: data.name, email_id: data.email_id, activated: data.activated }, process.env.SECRET_KEY, { expiresIn: "20m" });
+    return jwt.sign({ _id: data._id, name: data.name, email_id: data.email_id, activated: data.activated }, process.env.SECRET_KEY, { expiresIn: "20m" });
 }
 
 function getJwtForPassword(data) {
@@ -104,11 +113,10 @@ app.get('/activate', (req, res) => {
 });
 app.post('/login', (req, res) => {
     User.findOne({ email_id: req.body.email_id, password: req.body.password }, (err, user) => {
-
         if (err) return res.status(422).json({ message: 'Something went wrong' });
         if (!user) return res.status(500).json({ message: 'Invalid Email or Password' });
         else if (user.isActivated == "No") return res.status(500).json({ message: 'Email not verified! Please verify by email sent by us during registration' });
-        else return res.status(200).json({ 'token': getJwtForSession(user) });
+        else return res.status(200).json({ 'token': getJwtForSession(user), 'cart': user.cart.length });
     });
 });
 
@@ -159,4 +167,65 @@ app.post('/changePassword', (req, res) => {
     } else {
         return res.send(500).json({ message: "Something Went Wrong in Email verification ! Try again" });
     }
+});
+verifyJwtToken = (req, res, next) => {
+    var token;
+    if ('authorization' in req.headers) {
+        token = req.headers['authorization'].split(' ')[1];
+    }
+    if (!token) {
+        return res.status(403).json({ auth: false });
+    } else {
+        jwt.verify(token, process.env.SECRET_KEY,
+            (err, decoded) => {
+                if (err) {
+                    return res.status(500).send({ auth: false });
+                } else {
+                    req._id = decoded._id;
+                    next();
+                }
+            }
+        )
+    }
+}
+app.post('/addProduct', verifyJwtToken, (req, res) => {
+    req.body.userUploaded = req._id;
+    var prod = new Product({
+        'name': req.body.productname,
+        'description': req.body.description,
+        'owner': req.body.userUploaded,
+        'uploadeddate': req.body.dateUploaded,
+        'address': req.body.addressOfProduct,
+        'rentperday': req.body.rent,
+        'deposits': req.body.deposits,
+        'images': req.body.images
+    });
+    prod.save((err, data) => {
+        if (err)
+            return res.status(422).json({ message: 'Something Went Wrong' });
+        else
+            return res.status(200).json({ message: 'Product Added Successfully' });
+    });
+});
+app.get('/allProducts', (req, res) => {
+    Product.find({}, (err, data) => {
+        if (err) res.status(422).json({ message: 'Something Went Wrong' });
+        else {
+            return res.status(200).json({ 'products': data });
+        }
+    });
+});
+app.post('/addToCart', verifyJwtToken, (req, res) => {
+    User.updateOne({ _id: req._id }, {
+        $addToSet: { cart: req.body.cart }
+    }, (err, data) => {
+        if (err) res.status(422).json({ message: 'Something Went Wrong' });
+        else {
+            User.findOne({ _id: req._id }, { 'cart': 1 }, (err, data) => {
+                if (err) res.status(422).json({ message: 'Something Went Wrong' });
+                else
+                    return res.status(200).json({ 'cart': data.cart.length });
+            });
+        }
+    });
 });

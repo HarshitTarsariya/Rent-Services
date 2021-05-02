@@ -28,4 +28,7 @@ export class UserService {
   changePassword(data){
     return this.http.post(environment.apiEndPoint+'/changePassword',data)
   }
+  addToCart(data){
+    return this.http.post(environment.apiEndPoint+'/addToCart',data);
+  }
 }
